@@ -7,7 +7,9 @@ import messageRoutes from "./routes/messageRoutes.js"
 import MongoConnect from './database/db.js';
 import userRoutes from './routes/userRoutes.js'
 
-const app = express() ;
+import { app } from './socket/socket.js';
+
+
 dotenv.config() ; 
 
 const PORT = process.env.PORT || 8000 ;
