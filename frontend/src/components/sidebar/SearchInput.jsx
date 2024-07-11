@@ -20,13 +20,10 @@ const SearchInput = () => {
         if (conversation) {
             setSelectConversation(conversation)
             setSearch("")
-
         }
         else {
             return toast.error("No Such user found !")
         }
-
-
     }
   return (
     <form onSubmit={handleSubmit} className='flex items-center gap-2'>

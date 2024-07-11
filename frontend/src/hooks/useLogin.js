@@ -8,17 +8,17 @@ const useLogin = () => {
     const {setAuthUser} = useAuthContext()
 
     const login = async (username , password) => {
-        const success = handleInputErrors({ username , password}); 
+        const success = handleInputErrors( username , password); 
         if (!success) return ;
         setLoading(true) 
 
         try {
             const res = await fetch ("api/auth/login" , {
                 method : "POST" ,
-                headers : {"Context-Type": "application/json"} ,
+                headers : {"Content-Type": "application/json"} ,
                 body: JSON.stringify({username, password})
             })
-            const data = res.json() ;
+            const data = await res.json() ;
             if (data.error) {
                 throw new Error(data.error)
             }
@@ -40,7 +40,7 @@ const useLogin = () => {
 export default useLogin
 
 
-function handleInputErrors({username , password}){
+function handleInputErrors(username , password){
     if ( !username || !password){
         toast.error('Please fill all fields')
         return false ;

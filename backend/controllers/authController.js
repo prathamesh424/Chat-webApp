@@ -56,7 +56,6 @@ export const signup = async (req ,res) => {
             res.status(400).json({error: "Invalid user data"}); 
            }
        } catch (error) {
-            console.log("Error While Signup " , error.message);
             res.status(500).json({error : "Internal Server Error"})
        }
 };
@@ -67,7 +66,6 @@ export const login = async (req ,res) => {
         const user = await User.findOne({username}) ;
         const isPassword = await bcryptjs.compare(password , user?.password || "");
         if (!user || !isPassword) {
-            console.log(" Enter Valid Username or Password ..." , error.message);
             return res.status(400).json({error : "Invalid Username and Password!!"})
         }
         generateTokenAndSetCookie(user._id , res);
@@ -89,7 +87,6 @@ export const logout =  (req ,res) => {
         res.cookie("jwt" , "" , {maxAge : 0}) ;
         res.status(200).json({message :"User Logout Successfully !!!"})
     } catch (error) {
-        console.log("Error While Logout" ,error.message);
         res.status(500).json({error : "Internal Server Error"})
     }
 }   
